@@ -1,3 +1,9 @@
+## Changes:
+- Only use `compileDDC` API
+- Allow Hive package imports
+- Use `server_dev.dart` with `Logger.root.level = Level.INFO` for production. `server.dart` requires AppEngine.
+- Allow running on Windows machines for development
+
 # Dart Services
 
 A server backend to support DartPad.

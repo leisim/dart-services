@@ -14,7 +14,7 @@ packages:
       name: analysis_server_lib
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.8"
+    version: "0.1.9"
   analyzer:
     dependency: "direct main"
     description:
@@ -77,7 +77,7 @@ packages:
       name: codemirror
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.12+5.49.2"
+    version: "0.5.13+5.50.2"
   collection:
     dependency: transitive
     description:
@@ -175,7 +175,7 @@ packages:
       name: googleapis_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.11"
+    version: "0.2.11+1"
   grinder:
     dependency: "direct dev"
     description:
@@ -203,7 +203,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.0+2"
+    version: "0.12.0+4"
   http2:
     dependency: transitive
     description:
@@ -469,21 +469,21 @@ packages:
       name: test
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.4"
+    version: "1.11.0"
   test_api:
     dependency: transitive
     description:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.11"
+    version: "0.2.12"
   test_core:
     dependency: transitive
     description:
       name: test_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.15"
+    version: "0.2.17"
   tuneup:
     dependency: "direct dev"
     description:
@@ -525,7 +525,7 @@ packages:
       name: vm_service
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.4"
+    version: "2.3.1"
   watcher:
     dependency: transitive
     description:
