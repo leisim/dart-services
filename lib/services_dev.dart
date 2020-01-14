@@ -57,7 +57,7 @@ void main(List<String> args) {
     return;
   }
 
-  Logger.root.level = Level.FINER;
+  Logger.root.level = Level.INFO;
   Logger.root.onRecord.listen((LogRecord record) {
     print(record);
     if (record.stackTrace != null) print(record.stackTrace);
@@ -69,9 +69,9 @@ void main(List<String> args) {
 }
 
 class EndpointsServer {
-  static Future<EndpointsServer> serve(String sdkPath, int port) {
+  static Future<EndpointsServer> serve(String sdkPath, int port) async {
     final endpointsServer = EndpointsServer._(sdkPath, port);
-
+    await endpointsServer.flutterWebManager.warmup();
     return shelf
         .serve(endpointsServer.handler, InternetAddress.anyIPv4, port)
         .then((HttpServer server) {
@@ -83,8 +83,8 @@ class EndpointsServer {
   static Future<String> generateDiscovery(
       FlutterSdk flutterSdk, String serverUrl) async {
     final flutterWebManager = FlutterWebManager(flutterSdk);
-    final commonServer =
-        CommonServer(sdkPath, flutterWebManager, _ServerContainer(), _Cache());
+    final commonServer = CommonServer(
+        sdkPath, flutterWebManager, _ServerContainer(), InMemoryCache());
     await commonServer.init();
     final apiServer = ApiServer(apiPrefix: '/api', prettyPrint: true)
       ..addApi(commonServer);
@@ -127,8 +127,8 @@ class EndpointsServer {
     discoveryEnabled = false;
 
     flutterWebManager = FlutterWebManager(SdkManager.flutterSdk);
-    commonServer =
-        CommonServer(sdkPath, flutterWebManager, _ServerContainer(), _Cache());
+    commonServer = CommonServer(
+        sdkPath, flutterWebManager, _ServerContainer(), InMemoryCache());
     commonServer.init();
 
     apiServer = ApiServer(apiPrefix: '/api', prettyPrint: true)
