@@ -79,9 +79,26 @@ class FlutterSdk extends Sdk {
   }
 
   @override
-  String get sdkPath => path.join(flutterBinPath, 'cache/dart-sdk');
+  String get sdkPath => path.join(flutterBinPath, 'cache', 'dart-sdk');
 
-  String get flutterBinPath => path.join(Directory.current.path, 'flutter/bin');
+  String get flutterBinPath =>
+      path.join(Directory.current.path, 'flutter', 'bin');
+
+  String get flutterExecutablePath {
+    if (Platform.isWindows) {
+      return path.join(flutterBinPath, 'flutter.bat');
+    } else {
+      return path.join(flutterBinPath, 'flutter');
+    }
+  }
+
+  String get ddcPath {
+    if (Platform.isWindows) {
+      return path.join(sdkPath, 'bin', 'dartdevc.bat');
+    } else {
+      return path.join(sdkPath, 'bin', 'dartdevc');
+    }
+  }
 
   @override
   String get versionFull => _versionFull;

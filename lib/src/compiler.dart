@@ -29,10 +29,10 @@ class Compiler {
   final BazelWorkerDriver _ddcDriver;
 
   Compiler(this._sdk, this._flutterSdk, this._flutterWebManager)
-      : _dartdevcPath = path.join(_flutterSdk.sdkPath, 'bin', 'dartdevc'),
+      : _dartdevcPath = _flutterSdk.ddcPath,
         _ddcDriver = BazelWorkerDriver(
             () => Process.start(
-                  path.join(_flutterSdk.sdkPath, 'bin', 'dartdevc'),
+                  _flutterSdk.ddcPath,
                   <String>['--persistent_worker'],
                 ),
             maxWorkers: 1);
