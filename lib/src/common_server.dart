@@ -351,6 +351,7 @@ class CommonServer {
       description: 'Compile the given Dart source code and return the '
           'resulting JavaScript; this uses the dart2js compiler.')
   Future<CompileResponse> compile(CompileRequest request) {
+    throw UnsupportedError('Use compileDDC');
     return _compileDart2js(request.source,
         returnSourceMap: request.returnSourceMap ?? false);
   }
