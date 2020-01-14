@@ -39,11 +39,11 @@ class FlutterWebManager {
         .writeAsStringSync(pubspec);
 
     // create a .packages file
-    final packagesFileContents = '''
+    /*final String packagesFileContents = '''
 $_samplePackageName:lib/
 ''';
     File(path.join(_projectDirectory.path, '.packages'))
-        .writeAsStringSync(packagesFileContents);
+        .writeAsStringSync(packagesFileContents);*/
 
     // and create a lib/ folder for completeness
     Directory(path.join(_projectDirectory.path, 'lib')).createSync();
@@ -78,6 +78,7 @@ $_samplePackageName:lib/
 
   static final Set<String> _flutterWebImportPrefixes = <String>{
     'package:flutter',
+    'package:hive_flutter',
   };
 
   bool usesFlutterWeb(Set<String> imports) {
@@ -95,7 +96,7 @@ $_samplePackageName:lib/
   String getUnsupportedImport(Set<String> imports) {
     for (final import in imports) {
       // All dart: imports are ok;
-      if (import.startsWith('dart:')) {
+      if (import.startsWith('dart:') || import.startsWith('package:hive')) {
         continue;
       }
 
@@ -128,7 +129,7 @@ $_samplePackageName:lib/
     //
     // The value should be an available port number.
     final result = await Process.start(
-      path.join(flutterSdk.flutterBinPath, 'flutter'),
+      flutterSdk.flutterExecutablePath,
       ['pub', 'get'],
       workingDirectory: _projectDirectory.path,
       environment: {'DART_VM_OPTIONS': '--enable-vm-service=$observatoryPort'},
@@ -178,11 +179,14 @@ $_samplePackageName:lib/
   static String createPubspec(bool includeFlutterWeb) {
     var content = '''
 name: $_samplePackageName
+
+dependencies:
+  hive: any
 ''';
 
     if (includeFlutterWeb) {
       content += '''
-dependencies:
+  hive_flutter: any
   flutter:
     sdk: flutter
   flutter_test:
